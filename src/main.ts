@@ -79,10 +79,11 @@ export class AsyncIter<const T> implements AsyncIterable<T> {
   }
 
   /**
-   * Interleaves two iterables.
+   * Interleaves two iterables, until both iterables are exhausted.
+   * If the two iterables are of different lengths, then the longest iterator will yield all its remaining elements once the shorter one is exhausted.
    * @param iterA The first iterable.
    * @param iterB The second iterable.
-   * @returns An async iterator that yields elements from the two iterables in sequence.
+   * @returns An async iterator that yields elements from two iterables while alternating between them.
    */
   static interleave<T>(
     iterA: AsyncIterable<T> | Iterable<T>,
