@@ -1,0 +1,18 @@
+{
+  "name": "async-iterator",
+  "version": "1.0.0",
+  "description": "An async iterator implementation with focus on memory usage when iterating over collections that are bigger than what can be held in memory at once.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node -r ts-node/register test/main.test.ts",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.9.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
