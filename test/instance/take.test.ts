@@ -27,4 +27,4 @@ describe('AsyncIter.prototype.take', () => {
       []
     );
   });
-}); 
+});

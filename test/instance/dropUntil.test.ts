@@ -6,33 +6,29 @@ beforeEach((t) => {
   setTimeout(() => t.signal.dispatchEvent(new Event('abort')), 100);
 });
 
-describe('AsyncIter.prototype.takeWhile', () => {
-  it('should take values while predicate is true', async ({ signal }) => {
+describe('AsyncIter.prototype.dropUntil', () => {
+  it('should drop values until predicate becomes true', async ({ signal }) => {
     assert.deepEqual(
-      await AsyncIter.fromIter([1, 2, 3, 2, 1], signal)
-        .takeWhile((x) => x < 3)
+      await AsyncIter.fromIter([1, 2, 3, 4, 5], signal)
+        .dropUntil((x) => x > 3)
         .collect(),
-      [1, 2]
+      [4, 5]
     );
   });
 
-  it('should take no elements if predicate starts false', async ({
-    signal,
-  }) => {
+  it('should handle predicate never becoming true', async ({ signal }) => {
     assert.deepEqual(
       await AsyncIter.fromIter([1, 2, 3], signal)
-        .takeWhile(() => false)
+        .dropUntil(() => false)
         .collect(),
       []
     );
   });
 
-  it('should take all elements if predicate always true', async ({
-    signal,
-  }) => {
+  it('should handle predicate starting true', async ({ signal }) => {
     assert.deepEqual(
       await AsyncIter.fromIter([1, 2, 3], signal)
-        .takeWhile(() => true)
+        .dropUntil(() => true)
         .collect(),
       [1, 2, 3]
     );

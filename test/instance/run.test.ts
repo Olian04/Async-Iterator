@@ -7,7 +7,9 @@ beforeEach((t) => {
 });
 
 describe('AsyncIter.prototype.run', () => {
-  it('should consume iterator without collecting values', async ({ signal }) => {
+  it('should consume iterator without collecting values', async ({
+    signal,
+  }) => {
     let count = 0;
     await AsyncIter.fromIter([1, 2, 3], signal)
       .forEach(() => count++)
@@ -33,4 +35,4 @@ describe('AsyncIter.prototype.run', () => {
       /test error/
     );
   });
-}); 
+});

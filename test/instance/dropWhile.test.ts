@@ -10,13 +10,15 @@ describe('AsyncIter.prototype.dropWhile', () => {
   it('should drop values while predicate is true', async ({ signal }) => {
     assert.deepEqual(
       await AsyncIter.fromIter([1, 2, 3, 2, 1], signal)
-        .dropWhile(x => x < 3)
+        .dropWhile((x) => x < 3)
         .collect(),
       [3, 2, 1]
     );
   });
 
-  it('should drop all elements if predicate always true', async ({ signal }) => {
+  it('should drop all elements if predicate always true', async ({
+    signal,
+  }) => {
     assert.deepEqual(
       await AsyncIter.fromIter([1, 2, 3], signal)
         .dropWhile(() => true)
@@ -25,7 +27,9 @@ describe('AsyncIter.prototype.dropWhile', () => {
     );
   });
 
-  it('should keep all elements if predicate starts false', async ({ signal }) => {
+  it('should keep all elements if predicate starts false', async ({
+    signal,
+  }) => {
     assert.deepEqual(
       await AsyncIter.fromIter([1, 2, 3], signal)
         .dropWhile(() => false)
@@ -33,4 +37,4 @@ describe('AsyncIter.prototype.dropWhile', () => {
       [1, 2, 3]
     );
   });
-}); 
+});

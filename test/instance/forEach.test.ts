@@ -10,7 +10,7 @@ describe('AsyncIter.prototype.forEach', () => {
   it('should execute function for each value', async ({ signal }) => {
     const results: number[] = [];
     await AsyncIter.fromIter([1, 2, 3], signal)
-      .forEach(x => results.push(x))
+      .forEach((x) => results.push(x))
       .collect();
     assert.deepEqual(results, [1, 2, 3]);
   });
@@ -18,7 +18,7 @@ describe('AsyncIter.prototype.forEach', () => {
   it('should handle async functions', async ({ signal }) => {
     const results: number[] = [];
     await AsyncIter.fromIter([1, 2, 3], signal)
-      .forEach(async x => results.push(x))
+      .forEach(async (x) => results.push(x))
       .collect();
     assert.deepEqual(results, [1, 2, 3]);
   });
@@ -26,7 +26,7 @@ describe('AsyncIter.prototype.forEach', () => {
   it('should handle empty iterator', async ({ signal }) => {
     const results: number[] = [];
     await AsyncIter.fromIter([], signal)
-      .forEach(x => results.push(x))
+      .forEach((x) => results.push(x))
       .collect();
     assert.deepEqual(results, []);
   });
@@ -41,4 +41,4 @@ describe('AsyncIter.prototype.forEach', () => {
       /test error/
     );
   });
-}); 
+});

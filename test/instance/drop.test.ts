@@ -27,4 +27,4 @@ describe('AsyncIter.prototype.drop', () => {
       [1, 2, 3]
     );
   });
-}); 
+});

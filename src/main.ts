@@ -89,12 +89,34 @@ export class AsyncIter<const T> implements AsyncIterable<T> {
     iterB: AsyncIterable<T> | Iterable<T>,
     signal?: AbortSignal
   ): AsyncIter<T> {
-    return AsyncIter.zip(iterA, iterB, signal).then(async function* (self) {
-      for await (const [a, b] of self) {
-        yield a;
-        yield b;
+    return AsyncIter.fromGeneratorFn(async function* () {
+      const iterableA =
+        Symbol.iterator in iterA
+          ? iterA[Symbol.iterator]()
+          : iterA[Symbol.asyncIterator]();
+      const iterableB =
+        Symbol.iterator in iterB
+          ? iterB[Symbol.iterator]()
+          : iterB[Symbol.asyncIterator]();
+
+      while (true) {
+        const itA = await iterableA.next();
+        if (!itA.done) {
+          yield itA.value;
+        }
+
+        const itB = await iterableB.next();
+        if (!itB.done) {
+          yield itB.value;
+        }
+
+        if (itA.done && itB.done) {
+          break;
+        }
       }
-    });
+      await iterableA.return?.();
+      await iterableB.return?.();
+    }, signal);
   }
 
   /**
