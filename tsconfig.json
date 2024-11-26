@@ -10,7 +10,10 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "strict": true,
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "types": ["node"],
   },
   "include": ["src/**/*.ts"],
 }

@@ -1,15 +1,16 @@
 {
-  "name": "async-iterator",
+  "name": "@olian04/async-iterator",
   "version": "1.0.0",
   "description": "An async iterator implementation with focus on memory usage when iterating over collections that are bigger than what can be held in memory at once.",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
     "test": "node -r ts-node/register test/main.test.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Oliver Anteros Linnarsson (Olian04)",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.9.3",
     "ts-node": "^10.9.2",
